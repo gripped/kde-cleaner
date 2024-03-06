@@ -1,0 +1,67 @@
+.config/auroraerc,Plastik window Decorations,kde
+.config/baloofilerc,Baloo indexer settings,kde
+.config/bluedevilglobalrc,Bluetooth settings,kde
+.config/breezerc,Breeze window Decorations,kde
+.config/device_automounter_kcmrc,Auto mount settings,kde
+.config/digikamrc,digikam settings,digikam
+.config/dolphinrc,dolphin settings,dolphin
+.config/fontgroups.xml,User created font groups,kde
+.config/kaccessrc,Accessibility settings,kde
+.config/kactivitymanagerd-pluginsrc,Activity manager plugins,kde
+.config/kactivitymanagerdrc,Activity manager profiles and main settings,kde
+.config/kactivitymanagerd-statsrc,Activity manager statistics,kde
+.config/kactivitymanagerd-switcher,Activities switching,kde
+.config/kate-externaltoolspluginrc,kate plugin settings,kate
+.config/katemetainfos,kate meta info,kate
+.config/katemoderc,kate file assocciations,kate
+.config/katerc,kate settings,kate
+.config/kateschemarc,kate theme settings,kate
+.config/katesyntaxhighlightingrc,kate syntax highlighting,kate
+.config/katevirc,kate vi key mapping,kate
+.config/kcmfonts,DPI and some anti aliasing settings,kde
+.config/kcminputrc,Input device settings,kde
+.config/kdeconnect,kdeconnect dir,kdeconnect
+.config/kded5rc,Background KDE service settings,kde
+.config/kded_device_automounterrc,Automount settings,kde
+.config/kdeglobals,All sorts of things. Fonts - colours - themes - some state history,kde
+.config/kfontinstuirc,The dimensions of the panes on font manager,kde
+.config/kgammarc,Gamma settings,kde
+.config/kglobalshortcutsrc,Keyboard shortcuts,kde
+.config/khotkeysrc,Hotkeys - Shortcuts,kde
+.config/kmixctrlrc,kmix device settings,kmix
+.config/kmixrc,kmix settings,kmix
+.config/konquerorrc,konqueror settings,konqueror
+.config/konsolerc,konsole settings,konsole
+.config/konsolesshconfig,konsole ssh settings,konsole
+.config/konversationrc,konversationrc settings,konversation
+.config/krdcrc,krcd settings,krdc
+.config/krunnerrc,Krunner settings,kde
+.config/kscreenlockerrc,Screen lock settings,kde
+.config/ksmserverrc,KDE session settings (login - logout),kde
+.config/ksplashrc,Splash screen settings,kde
+.config/ktimezonedrc,Time zone settings,kde
+.config/kwalletrc,kwallet settings,kwallet
+.config/kwinrc,Desktop settings including effects,kde
+.config/kwinrulesrc,User creating window rules,kde
+.config/kxkbrc,Keyboard layout settings,kde
+.config/mimeapps.list,File associations,kde
+.config/oxygenrc,Oxygen window Decorations,kde
+.config/plasma-localerc,Locale settings,kde
+.config/plasmanotifyrc,Notification settings,kde
+.config/plasma-org.kde.plasma.desktop-appletsrc,Panels and widgets layouts plus the same for Activities,kde
+.config/plasmarc,Global theme,kde
+.config/PlasmaUserFeedback,Telemetry settings,kde
+.config/powermanagementprofilesrc,Power management profiles,kde
+.config/touchpadxlibinputrc,Touchpad settings,kde
+.config/Trolltech.conf,Qt settings,qt
+.local/share/color-schemes,User custom colour schemes,kde
+.local/share/dolphin,dolphin settings and state,dolphin
+.local/share/katepart5,kate custom syntax,kate
+.local/share/konsole,konsole custom profiles,konsole
+.local/share/krdc,krdc bookmarks,krdc
+.local/share/kscreen,kscreen settings,kscreen
+.local/share/kservices5,User custom service menus,kde
+.local/share/kwalletd,kwallet wallets,kwallet 
+.local/share/user-places.xbel,User custom places,dolphin
+.local/share/org.kde.syntax-highlighting,kate custom syntax & colour themes,kate
+.local/share/kxmlgui5,Program Custom toolbars,various

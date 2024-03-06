@@ -1,0 +1,161 @@
+#!/usr/bin/python
+#
+#   kde-cleaner
+#   Backup and optionally delete KDE / Plasma settings
+#
+
+import os
+import time
+import shutil
+import argparse
+import operator
+
+
+def setup_options():
+    parser = argparse.ArgumentParser(prog='kde-cleaner',
+                                     description='Creates a timestamped backup of KDE config files to ~/.local/share/kde-cleaner and optionally deletes the originals.',
+                                     epilog='With no options given a backup of of non program KDE config files will be made')
+    parser.add_argument(
+        "--delete", "-d",
+        action="store_true",
+        default=False,
+        help="Deletes the config files after backing up"
+    )
+    parser.add_argument(
+        "--list", "-l",
+        action="store_true",
+        default=False,
+        help="Lists the config files covered by the program and then exits"
+    )
+    parser.add_argument(
+        "--programs", "-p",
+        action="store_true",
+        default=False,
+        help="Also process a limited set of KDE program configs"
+    )
+
+    args = parser.parse_args()
+    return args
+
+
+def script():
+    home = os.path.expanduser('~')
+    kde_cleaner_dir = os.path.join(home, '.local', 'share', 'kde-cleaner')
+    backup_dir = os.path.join(kde_cleaner_dir, time.strftime("%Y-%m-%d-%H:%M:%S"))
+
+    if not os.path.exists(kde_cleaner_dir):
+        os.makedirs(kde_cleaner_dir)
+    os.makedirs(f'{backup_dir}/.config')
+    if options.programs:
+        os.makedirs(f'{backup_dir}/.local')
+
+    config_files_list = data()
+    if options.list:
+        config_files_list = sorted(config_files_list, key=operator.itemgetter('prog'))
+        max_prog_len = max(len(config_dict['prog']) for config_dict in config_files_list)
+        max_filename_len = max(len(config_dict['file']) for config_dict in config_files_list)
+        max_desc_len = max(len(config_dict['desc']) for config_dict in config_files_list)
+    for config_dict in config_files_list:
+        trunc_path_parts = config_dict['file'].split("/")
+        filename = trunc_path_parts[-1]
+        dir_path = '/'.join(trunc_path_parts[:-1])
+        description = config_dict['desc']
+        program = config_dict['prog']
+        if options.list:
+            print(f"{program.ljust(max_prog_len)}\t{config_dict['file'].ljust(max_filename_len)}\t{description.ljust(max_desc_len)}")
+            continue
+        if not options.programs and program != 'kde':
+            continue
+        config_file_path = os.path.join(home, dir_path, filename)
+        backup_file_path = os.path.join(backup_dir, dir_path, filename)
+        if os.path.isfile(config_file_path):
+            if not os.path.exists(os.path.join(backup_dir, dir_path)):
+                os.makedirs(os.path.join(backup_dir, dir_path))
+            shutil.copyfile(config_file_path, backup_file_path)
+            print(f'Copied {config_file_path} to {backup_file_path}')
+            if options.delete:
+                os.remove(config_file_path)
+                print(f'Deleted {config_file_path}')
+        if os.path.isdir(config_file_path):
+            shutil.copytree(config_file_path, backup_file_path)
+            print(f'Copied dir {config_file_path} to {backup_file_path}')
+            if options.delete:
+                shutil.rmtree(config_file_path)
+                print(f'Deleted {config_file_path}')
+
+
+def data():
+    cfg_dict_list = [
+        {'file': '.config/auroraerc', 'desc': 'Plastik window Decorations', 'prog': 'kde'},
+        {'file': '.config/baloofilerc', 'desc': 'Baloo indexer settings', 'prog': 'kde'},
+        {'file': '.config/bluedevilglobalrc', 'desc': 'Bluetooth settings', 'prog': 'kde'},
+        {'file': '.config/breezerc', 'desc': 'Breeze window Decorations', 'prog': 'kde'},
+        {'file': '.config/device_automounter_kcmrc', 'desc': 'Auto mount settings', 'prog': 'kde'},
+        {'file': '.config/digikamrc', 'desc': 'digikam settings', 'prog': 'digikam'},
+        {'file': '.config/dolphinrc', 'desc': 'dolphin settings', 'prog': 'dolphin'},
+        {'file': '.config/fontgroups.xml', 'desc': 'User created font groups', 'prog': 'kde'},
+        {'file': '.config/kaccessrc', 'desc': 'Accessibility settings', 'prog': 'kde'},
+        {'file': '.config/kactivitymanagerd-pluginsrc', 'desc': 'Activity manager plugins', 'prog': 'kde'},
+        {'file': '.config/kactivitymanagerdrc', 'desc': 'Activity manager profiles and main settings', 'prog': 'kde'},
+        {'file': '.config/kactivitymanagerd-statsrc', 'desc': 'Activity manager statistics', 'prog': 'kde'},
+        {'file': '.config/kactivitymanagerd-switcher', 'desc': 'Activities switching', 'prog': 'kde'},
+        {'file': '.config/kate-externaltoolspluginrc', 'desc': 'kate plugin settings', 'prog': 'kate'},
+        {'file': '.config/katemetainfos', 'desc': 'kate meta info', 'prog': 'kate'},
+        {'file': '.config/katemoderc', 'desc': 'kate file assocciations', 'prog': 'kate'},
+        {'file': '.config/katerc', 'desc': 'kate settings', 'prog': 'kate'},
+        {'file': '.config/kateschemarc', 'desc': 'kate theme settings', 'prog': 'kate'},
+        {'file': '.config/katesyntaxhighlightingrc', 'desc': 'kate syntax highlighting', 'prog': 'kate'},
+        {'file': '.config/katevirc', 'desc': 'kate vi key mapping', 'prog': 'kate'},
+        {'file': '.config/kcmfonts', 'desc': 'DPI and some anti aliasing settings', 'prog': 'kde'},
+        {'file': '.config/kcminputrc', 'desc': 'Input device settings', 'prog': 'kde'},
+        {'file': '.config/kdeconnect', 'desc': 'kdeconnect dir', 'prog': 'kdeconnect'},
+        {'file': '.config/kded5rc', 'desc': 'Background KDE service settings', 'prog': 'kde'},
+        {'file': '.config/kded_device_automounterrc', 'desc': 'Automount settings', 'prog': 'kde'},
+        {'file': '.config/kdeglobals', 'desc': 'All sorts of things. Fonts - colours - themes - some state history', 'prog': 'kde'},
+        {'file': '.config/kfontinstuirc', 'desc': 'The dimensions of the panes on font manager', 'prog': 'kde'},
+        {'file': '.config/kgammarc', 'desc': 'Gamma settings', 'prog': 'kde'},
+        {'file': '.config/kglobalshortcutsrc', 'desc': 'Keyboard shortcuts', 'prog': 'kde'},
+        {'file': '.config/khotkeysrc', 'desc': 'Hotkeys - Shortcuts', 'prog': 'kde'},
+        {'file': '.config/kmixctrlrc', 'desc': 'kmix device settings', 'prog': 'kmix'},
+        {'file': '.config/kmixrc', 'desc': 'kmix settings', 'prog': 'kmix'},
+        {'file': '.config/konquerorrc', 'desc': 'konqueror settings', 'prog': 'konqueror'},
+        {'file': '.config/konsolerc', 'desc': 'konsole settings', 'prog': 'konsole'},
+        {'file': '.config/konsolesshconfig', 'desc': 'konsole ssh settings', 'prog': 'konsole'},
+        {'file': '.config/konversationrc', 'desc': 'konversationrc settings', 'prog': 'konversation'},
+        {'file': '.config/krdcrc', 'desc': 'krcd settings', 'prog': 'krdc'},
+        {'file': '.config/krunnerrc', 'desc': 'Krunner settings', 'prog': 'kde'},
+        {'file': '.config/kscreenlockerrc', 'desc': 'Screen lock settings', 'prog': 'kde'},
+        {'file': '.config/ksmserverrc', 'desc': 'KDE session settings (login - logout)', 'prog': 'kde'},
+        {'file': '.config/ksplashrc', 'desc': 'Splash screen settings', 'prog': 'kde'},
+        {'file': '.config/ktimezonedrc', 'desc': 'Time zone settings', 'prog': 'kde'},
+        {'file': '.config/kwalletrc', 'desc': 'kwallet settings', 'prog': 'kwallet'},
+        {'file': '.config/kwinrc', 'desc': 'Desktop settings including effects', 'prog': 'kde'},
+        {'file': '.config/kwinrulesrc', 'desc': 'User creating window rules', 'prog': 'kde'},
+        {'file': '.config/kxkbrc', 'desc': 'Keyboard layout settings', 'prog': 'kde'},
+        {'file': '.config/mimeapps.list', 'desc': 'File associations', 'prog': 'kde'},
+        {'file': '.config/oxygenrc', 'desc': 'Oxygen window Decorations', 'prog': 'kde'},
+        {'file': '.config/plasma-localerc', 'desc': 'Locale settings', 'prog': 'kde'},
+        {'file': '.config/plasmanotifyrc', 'desc': 'Notification settings', 'prog': 'kde'},
+        {'file': '.config/plasma-org.kde.plasma.desktop-appletsrc', 'desc': 'Panels and widgets layouts plus the same for Activities', 'prog': 'kde'},
+        {'file': '.config/plasmarc', 'desc': 'Global theme', 'prog': 'kde'},
+        {'file': '.config/PlasmaUserFeedback', 'desc': 'Telemetry settings', 'prog': 'kde'},
+        {'file': '.config/powermanagementprofilesrc', 'desc': 'Power management profiles', 'prog': 'kde'},
+        {'file': '.config/touchpadxlibinputrc', 'desc': 'Touchpad settings', 'prog': 'kde'},
+        {'file': '.config/Trolltech.conf', 'desc': 'Qt settings', 'prog': 'qt'},
+        {'file': '.local/share/color-schemes', 'desc': 'User custom colour schemes', 'prog': 'kde'},
+        {'file': '.local/share/dolphin', 'desc': 'dolphin settings and state', 'prog': 'dolphin'},
+        {'file': '.local/share/katepart5', 'desc': 'kate custom syntax', 'prog': 'kate'},
+        {'file': '.local/share/konsole', 'desc': 'konsole custom profiles', 'prog': 'konsole'},
+        {'file': '.local/share/krdc', 'desc': 'krdc bookmarks', 'prog': 'krdc'},
+        {'file': '.local/share/kscreen', 'desc': 'kscreen settings', 'prog': 'kscreen'},
+        {'file': '.local/share/kservices5', 'desc': 'User custom service menus', 'prog': 'kde'},
+        {'file': '.local/share/kwalletd', 'desc': 'kwallet wallets', 'prog': 'kwallet'},
+        {'file': '.local/share/user-places.xbel', 'desc': 'User custom places', 'prog': 'dolphin'},
+        {'file': '.local/share/org.kde.syntax-highlighting', 'desc': 'kate custom syntax & colour themes', 'prog': 'kate'},
+        {'file': '.local/share/kxmlgui5', 'desc': 'Program Custom toolbars', 'prog': 'various'},
+    ]
+    return cfg_dict_list
+
+
+options = setup_options()
+script()
