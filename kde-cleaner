@@ -40,14 +40,16 @@ def setup_options():
 
 def script():
     home = os.path.expanduser('~')
-    kde_cleaner_dir = os.path.join(home, '.local', 'share', 'kde-cleaner')
-    backup_dir = os.path.join(kde_cleaner_dir, time.strftime("%Y-%m-%d-%H:%M:%S"))
+    
+    if not options.list:
+        kde_cleaner_dir = os.path.join(home, '.local', 'share', 'kde-cleaner')
+        backup_dir = os.path.join(kde_cleaner_dir, time.strftime("%Y-%m-%d-%H:%M:%S"))
 
-    if not os.path.exists(kde_cleaner_dir):
-        os.makedirs(kde_cleaner_dir)
-    os.makedirs(f'{backup_dir}/.config')
-    if options.programs:
-        os.makedirs(f'{backup_dir}/.local')
+        if not os.path.exists(kde_cleaner_dir):
+            os.makedirs(kde_cleaner_dir)
+        os.makedirs(f'{backup_dir}/.config')
+        if options.programs:
+            os.makedirs(f'{backup_dir}/.local')
 
     config_files_list = data()
     if options.list:
