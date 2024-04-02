@@ -12,9 +12,11 @@ import operator
 
 
 def setup_options():
-    parser = argparse.ArgumentParser(prog='kde-cleaner',
-                                     description='Creates a timestamped backup of KDE config files to ~/.local/share/kde-cleaner and optionally deletes the originals.',
-                                     epilog='With no options given a backup of of non program KDE config files will be made')
+    parser = argparse.ArgumentParser(
+        prog='kde-cleaner',
+        description='Creates a timestamped backup of KDE config files to ~/.local/share/kde-cleaner and optionally deletes the originals.',
+        epilog='With no options given a backup of of non program KDE config files will be made'
+    )
     parser.add_argument(
         "--delete", "-d",
         action="store_true",
