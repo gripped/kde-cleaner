@@ -1,3 +1,4 @@
+.config/arkrc,ark settings,ark
 .config/auroraerc,Plastik window Decorations,kde
 .config/baloofilerc,Baloo indexer settings,kde
 .config/bluedevilglobalrc,Bluetooth settings,kde
@@ -48,7 +49,7 @@
 .config/oxygenrc,Oxygen window Decorations,kde
 .config/plasma-localerc,Locale settings,kde
 .config/plasmanotifyrc,Notification settings,kde
-.config/plasma-org.kde.plasma.desktop-appletsrc,Panels and widgets layouts plus the same for Activities,kde
+.config/plasma-org.kde.plasma.desktop-appletsrc,Panels - Activities and widget layouts,kde
 .config/plasmarc,Global theme,kde
 .config/PlasmaUserFeedback,Telemetry settings,kde
 .config/powermanagementprofilesrc,Power management profiles,kde
@@ -57,11 +58,12 @@
 .local/share/color-schemes,User custom colour schemes,kde
 .local/share/dolphin,dolphin settings and state,dolphin
 .local/share/katepart5,kate custom syntax,kate
+.local/share/kio,User custom service menus (at least),kde
 .local/share/konsole,konsole custom profiles,konsole
 .local/share/krdc,krdc bookmarks,krdc
 .local/share/kscreen,kscreen settings,kscreen
-.local/share/kservices5,User custom service menus,kde
+.local/share/kservices5,User custom service menus (KF5),kde
 .local/share/kwalletd,kwallet wallets,kwallet 
-.local/share/user-places.xbel,User custom places,dolphin
-.local/share/org.kde.syntax-highlighting,kate custom syntax & colour themes,kate
 .local/share/kxmlgui5,Program Custom toolbars,various
+.local/share/org.kde.syntax-highlighting,kate custom syntax & colour themes,kate
+.local/share/user-places.xbel,User custom places,kde

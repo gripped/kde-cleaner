@@ -7,10 +7,11 @@ with open('list.txt', 'r') as file:
     lines = file.readlines()
 
 cfg_dict_list = []
-for line in lines:
+for i, line in enumerate(lines):
     parts = line.split(',')
     if len(parts) != 3:
         print("Invalid list (Blank lines?)")
+        print(line)
         quit()
     the_dict = {'file': parts[0], 'desc': parts[1], 'prog': parts[2]}
     cfg_dict_list.append(the_dict)
