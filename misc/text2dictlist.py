@@ -10,8 +10,8 @@ cfg_dict_list = []
 for i, line in enumerate(lines):
     parts = line.split(',')
     if len(parts) != 3:
-        print("Invalid list (Blank lines?)")
-        print(line)
+        print("Invalid list")
+        print(f'{i} {line}')
         quit()
     the_dict = {'file': parts[0], 'desc': parts[1], 'prog': parts[2]}
     cfg_dict_list.append(the_dict)
