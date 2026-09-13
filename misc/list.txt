@@ -14,7 +14,7 @@
 .config/kactivitymanagerd-switcher,Activities switching,kde
 .config/kate-externaltoolspluginrc,kate plugin settings,kate
 .config/katemetainfos,kate meta info,kate
-.config/katemoderc,kate file assocciations,kate
+.config/katemoderc,kate file associations,kate
 .config/katerc,kate settings,kate
 .config/kateschemarc,kate theme settings,kate
 .config/katesyntaxhighlightingrc,kate syntax highlighting,kate
@@ -29,6 +29,8 @@
 .config/kgammarc,Gamma settings,kde
 .config/kglobalshortcutsrc,Keyboard shortcuts,kde
 .config/khotkeysrc,Hotkeys - Shortcuts,kde
+.config/kiorc,KIO file and URL handling settings,kde
+.config/klaunchrc,KDE application launcher settings,kde
 .config/kmixctrlrc,kmix device settings,kmix
 .config/kmixrc,kmix settings,kmix
 .config/konquerorrc,konqueror settings,konqueror
@@ -38,12 +40,12 @@
 .config/krdcrc,krcd settings,krdc
 .config/krunnerrc,Krunner settings,kde
 .config/kscreenlockerrc,Screen lock settings,kde
-.config/ksmserverrc,KDE session settings (login - logout),kde
+.config/ksmserverrc,KDE session management settings,kde
 .config/ksplashrc,Splash screen settings,kde
 .config/ktimezonedrc,Time zone settings,kde
 .config/kwalletrc,kwallet settings,kwallet
 .config/kwinrc,Desktop settings including effects,kde
-.config/kwinrulesrc,User creating window rules,kde
+.config/kwinrulesrc,User custom window rules,kde
 .config/kxkbrc,Keyboard layout settings,kde
 .config/mimeapps.list,File associations,kde
 .config/oxygenrc,Oxygen window Decorations,kde
@@ -56,6 +58,7 @@
 .config/powermanagementprofilesrc,Power management profiles,kde
 .config/touchpadxlibinputrc,Touchpad settings,kde
 .config/Trolltech.conf,Qt settings,qt
+.local/share/applications,User custom application desktop entries,kde
 .local/share/color-schemes,User custom colour schemes,kde
 .local/share/dolphin,dolphin settings and state,dolphin
 .local/share/katepart5,kate custom syntax,kate
@@ -64,7 +67,8 @@
 .local/share/krdc,krdc bookmarks,krdc
 .local/share/kscreen,kscreen settings,kscreen
 .local/share/kservices5,User custom service menus (KF5),kde
-.local/share/kwalletd,kwallet wallets,kwallet 
+.local/share/kwalletd,kwallet wallets,kwallet
+.local/share/kwin,User KWin scripts and effects,kde
 .local/share/kxmlgui5,Program Custom toolbars,various
 .local/share/org.kde.syntax-highlighting,kate custom syntax & colour themes,kate
 .local/share/user-places.xbel,User custom places,kde
