@@ -50,6 +50,7 @@
 .config/plasma-localerc,Locale settings,kde
 .config/plasmanotifyrc,Notification settings,kde
 .config/plasma-org.kde.plasma.desktop-appletsrc,Panels - Activities and widget layouts,kde
+.config/plasma-workspace,Custom env exports and scripts to run on closing kde,kde
 .config/plasmarc,Global theme,kde
 .config/PlasmaUserFeedback,Telemetry settings,kde
 .config/powermanagementprofilesrc,Power management profiles,kde
